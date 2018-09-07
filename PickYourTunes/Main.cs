@@ -57,7 +57,7 @@ namespace PickYourTunes
             }
 
             // Show the vehicle hash by using the cheat "pyt hash"
-            if (Function.Call<bool>(Hash._0x557E43C447E700A8, Game.GenerateHash("pyt hash")))
+            if (Checks.CheatHasBeenEntered("pyt hash"))
             {
                 if (Game.Player.Character.CurrentVehicle == null)
                 {
@@ -69,7 +69,7 @@ namespace PickYourTunes
                 }
             }
             // Show the radio ID by using the "pyt radio" cheat
-            if (Function.Call<bool>(Hash._0x557E43C447E700A8, Game.GenerateHash("pyt radio")))
+            if (Checks.CheatHasBeenEntered("pyt radio"))
             {
                 if (Game.Player.Character.CurrentVehicle == null)
                 {
