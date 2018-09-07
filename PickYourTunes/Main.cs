@@ -90,6 +90,12 @@ namespace PickYourTunes
                 // If there is a song requested and the music is stopped, play it
                 if (Song != string.Empty && OutputDevice.PlaybackState == PlaybackState.Stopped)
                 {
+                    if (!File.Exists(Path.Combine(SongLocation, Song)))
+                    {
+                        UI.Notify(string.Format("Warning: {0} does not exist", Song));
+                        return;
+                    }
+
                     // Store our current file
                     CurrentFile = new AudioFileReader(Path.Combine(SongLocation, Song));
                     // Initialize it
