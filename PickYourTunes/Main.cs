@@ -47,7 +47,7 @@ namespace PickYourTunes
         private void OnTick(object Sender, EventArgs Args)
         {
             // Pause the playback if the user is not on a running vehicle
-            if (Game.IsPaused || Checks.PlayerIsOutOfVehicle() || !Checks.IsEngineRunning())
+            if (Game.IsPaused || !Checks.IsEngineRunning())
             {
                 OutputDevice.Pause();
             }
