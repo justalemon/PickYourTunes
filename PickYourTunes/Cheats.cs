@@ -1,5 +1,6 @@
 ﻿using GTA;
 using GTA.Native;
+using PickYourTunes.Properties;
 using System;
 
 namespace PickYourTunes
@@ -17,12 +18,12 @@ namespace PickYourTunes
             // Show the vehicle hash by using the cheat "pyt hash"
             if (Checks.CheatHasBeenEntered("pyt hash"))
             {
-                UI.Notify(string.Format("Your vehicle hash is: {0}", Game.Player.Character.CurrentVehicle.Model.GetHashCode()));
+                UI.Notify(string.Format(Resources.CheatHash, Game.Player.Character.CurrentVehicle.Model.GetHashCode()));
             }
             // Show the radio ID by using the "pyt radio" cheat
             else if (Checks.CheatHasBeenEntered("pyt radio"))
             {
-                UI.Notify(string.Format("The current radio ID is: {0}", Function.Call<int>(Hash.GET_PLAYER_RADIO_STATION_INDEX)));
+                UI.Notify(string.Format(Resources.CheatRadio, Function.Call<int>(Hash.GET_PLAYER_RADIO_STATION_INDEX)));
             }
         }
     }

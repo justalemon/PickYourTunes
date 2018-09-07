@@ -1,6 +1,7 @@
 using GTA;
 using GTA.Native;
 using NAudio.Wave;
+using PickYourTunes.Properties;
 using System;
 using System.Globalization;
 using System.IO;
@@ -92,7 +93,7 @@ namespace PickYourTunes
                 {
                     if (!File.Exists(Path.Combine(SongLocation, Song)))
                     {
-                        UI.Notify(string.Format("Warning: {0} does not exist", Song));
+                        UI.Notify(string.Format(Resources.FileWarning, Song));
                         return;
                     }
 
