@@ -2,8 +2,10 @@ using GTA;
 using GTA.Native;
 using NAudio.Wave;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 
 namespace PickYourTunes
 {
@@ -29,12 +31,19 @@ namespace PickYourTunes
 
         public PickYourTunes()
         {
+            // Patch our locale so we don't have the "coma vs dot" problem
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+
             // Set our events for the script and player
             Tick += OnTick;
             Tick += Cheats.OnCheat;
             OutputDevice.PlaybackStopped += OnStop;
             
-            OutputDevice.Volume = 0.5f;
+            // Set the volume to the configuration value
+            OutputDevice.Volume = Config.GetValue("General", "Volume", 0.2f);
 
             // Check that the directory with our scripts exists
             // If not, create it
