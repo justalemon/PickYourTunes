@@ -53,18 +53,21 @@ namespace PickYourTunes
                 Function.Call(Hash.SET_VEH_RADIO_STATION, Game.Player.Character.CurrentVehicle, "OFF");
             }
 
+            // If the game is paused OR the engine is not running AND the audio is not stopped
+            // Pause it, because is running and we are not in a vehicle
+            if ((Game.IsPaused || !Checks.IsEngineRunning()) && OutputDevice.PlaybackState != PlaybackState.Stopped)
             {
                 OutputDevice.Pause();
             }
-            // And restore it if things change
+            // If the statement above didn't worked (not paused but on a running vehicle)
+            // Resume the playback
             else if (OutputDevice.PlaybackState == PlaybackState.Paused)
             {
                 OutputDevice.Play();
             }
-
-            // Now, do the real work
-            // Check if the player is getting in a vehicle, if it does
-            if (Game.Player.Character.IsGettingIntoAVehicle)
+            // If none of the above worked out, there is nothing playing nor loaded
+            // Load the configuration value and check what is going on
+            else
             {
                 // Store the vehicle that the player is getting into
                 Vehicle PlayerCar = Game.Player.Character.GetVehicleIsTryingToEnter();
@@ -75,7 +78,7 @@ namespace PickYourTunes
                 // Store our custom song
                 string Song = Config.GetValue("Songs", PlayerCar.Model.GetHashCode().ToString(), string.Empty);
                 
-                // If there is a default sound file requested, play it
+                // If there is a song requested and the music is stopped, play it
                 if (Song != string.Empty && OutputDevice.PlaybackState == PlaybackState.Stopped)
                 {
                     // Store our current file
