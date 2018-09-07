@@ -29,7 +29,9 @@ namespace PickYourTunes
 
         public PickYourTunes()
         {
+            // Set our events for the script and player
             Tick += OnTick;
+            Tick += Cheats.OnCheat;
             OutputDevice.PlaybackStopped += OnStop;
             
             OutputDevice.Volume = 0.5f;
@@ -53,31 +55,6 @@ namespace PickYourTunes
             else if (OutputDevice.PlaybackState == PlaybackState.Paused)
             {
                 OutputDevice.Play();
-            }
-
-            // Show the vehicle hash by using the cheat "pyt hash"
-            if (Checks.CheatHasBeenEntered("pyt hash"))
-            {
-                if (Game.Player.Character.CurrentVehicle == null)
-                {
-                    UI.Notify("You are not in a vehicle");
-                }
-                else
-                {
-                    UI.Notify(string.Format("Your vehicle hash is: {0}", Game.Player.Character.CurrentVehicle.Model.GetHashCode()));
-                }
-            }
-            // Show the radio ID by using the "pyt radio" cheat
-            if (Checks.CheatHasBeenEntered("pyt radio"))
-            {
-                if (Game.Player.Character.CurrentVehicle == null)
-                {
-                    UI.Notify("You are not in a vehicle");
-                }
-                else
-                {
-                    UI.Notify(string.Format("The current radio ID is: {0}", Function.Call<int>(Hash.GET_PLAYER_RADIO_STATION_INDEX)));
-                }
             }
 
             // Now, do the real work
