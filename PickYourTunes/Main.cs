@@ -42,7 +42,9 @@ namespace PickYourTunes
                     UI.Notify(string.Format("The current radio ID is: {0}", Function.Call<int>(Hash.GET_PLAYER_RADIO_STATION_INDEX)));
                 }
             }
+
             // Now, do the real work
+            // Check if the player is getting in a vehicle, if it does
             if (Game.Player.Character.IsGettingIntoAVehicle)
             {
                 // Store the vehicle that the player is getting into
