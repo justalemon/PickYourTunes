@@ -1,4 +1,4 @@
-﻿using GTA;
+using GTA;
 using GTA.Native;
 using NAudio.Wave;
 using System;
@@ -44,13 +44,12 @@ namespace PickYourTunes
 
         private void OnTick(object Sender, EventArgs Args)
         {
-            // If the player is not on a vehicle and is not trying to enter one
-            if (Game.Player.Character.CurrentVehicle == null && !Game.Player.Character.IsGettingIntoAVehicle || Game.IsPaused)
+            // Pause the playback if the user is not on a running vehicle
+            if (Game.IsPaused || Checks.PlayerIsOutOfVehicle() || !Checks.IsEngineRunning())
             {
-                // Pause the playback
                 OutputDevice.Pause();
             }
-            // And restore it if is paused
+            // And restore it if things change
             else if (OutputDevice.PlaybackState == PlaybackState.Paused)
             {
                 OutputDevice.Play();
