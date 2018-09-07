@@ -46,8 +46,13 @@ namespace PickYourTunes
 
         private void OnTick(object Sender, EventArgs Args)
         {
-            // Pause the playback if the user is not on a running vehicle
-            if (Game.IsPaused || !Checks.IsEngineRunning())
+            // Just a hack recommended by "Slick" on the 5mods server to keep the radio disabled
+            // "I made my own by setting the radio per tick, not the best way but hey it works"
+            if (OutputDevice.PlaybackState == PlaybackState.Playing && Game.Player.Character.CurrentVehicle != null)
+            {
+                Function.Call(Hash.SET_VEH_RADIO_STATION, Game.Player.Character.CurrentVehicle, "OFF");
+            }
+
             {
                 OutputDevice.Pause();
             }
@@ -77,8 +82,6 @@ namespace PickYourTunes
                     CurrentFile = new AudioFileReader(Path.Combine(SongLocation, Song));
                     // Initialize it
                     OutputDevice.Init(CurrentFile);
-                    // Disable the radio
-                    Function.Call(Hash.SET_VEHICLE_RADIO_ENABLED, Game.Player.Character.CurrentVehicle, false);
                     // And play it
                     OutputDevice.Play();
                 }
@@ -95,9 +98,6 @@ namespace PickYourTunes
 
         private void OnStop(object Sender, StoppedEventArgs Args)
         {
-            // Enable the radio
-            // Function.Call(Hash.SET_VEHICLE_RADIO_ENABLED, Game.Player.Character.CurrentVehicle, true);
-
             // if the current file exists
             if (CurrentFile != null)
             {
