@@ -82,11 +82,11 @@ namespace PickYourTunes
                 // Store the vehicle that the player is getting into
                 Vehicle PlayerCar = Game.Player.Character.GetVehicleIsTryingToEnter();
                 // Store our radio ID
-                int RadioID = Config.GetValue("Vehicles", PlayerCar.Model.GetHashCode().ToString(), 256);
+                int RadioID = Config.GetValue("Radios", PlayerCar.Model.GetHashCode().ToString(), 256);
                 // Store our radio name
                 string RadioName = Function.Call<string>(Hash.GET_RADIO_STATION_NAME, RadioID);
                 // Store our custom song
-                string Song = Config.GetValue("Songs", PlayerCar.Model.GetHashCode().ToString(), string.Empty);
+                string Song = Config.GetValue("Audio", PlayerCar.Model.GetHashCode().ToString(), string.Empty);
                 
                 // If there is a song requested and the music is stopped, play it
                 if (Song != string.Empty && OutputDevice.PlaybackState == PlaybackState.Stopped)
