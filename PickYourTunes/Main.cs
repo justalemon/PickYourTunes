@@ -104,13 +104,10 @@ namespace PickYourTunes
                     // And play it
                     OutputDevice.Play();
                 }
-                // Else if our default value is not 256 (aka invalid or not added), do what we should
+                // Else if our default value is not 256 (aka invalid or not added), change the radio
                 else if (RadioID != 256)
                 {
-                    // Turn on the vehicle radio
-                    Function.Call(Hash.SET_VEHICLE_RADIO_ENABLED, true);
-                    // And set the requested radio
-                    Function.Call(Hash.SET_VEH_RADIO_STATION, PlayerCar, RadioName);
+                    Tools.SetRadioByName(RadioName, PlayerCar);
                 }
             }
         }
