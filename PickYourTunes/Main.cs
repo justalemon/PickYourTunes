@@ -87,31 +87,43 @@ namespace PickYourTunes
                 Vehicle CurrentVehicle = Game.Player.Character.GetVehicleIsTryingToEnter();
                 // Store the hash that we have
                 PreviousVehicle = CurrentVehicle.Model.GetHashCode();
-                // Store our radio ID
-                int RadioID = Config.GetValue("Radios", CurrentVehicle.Model.GetHashCode().ToString(), 256);
-                // Store our custom song
-                string Song = Config.GetValue("Audio", CurrentVehicle.Model.GetHashCode().ToString(), string.Empty);
-                
-                // If there is a song requested and the music is stopped, play it
-                if (Song != string.Empty && OutputDevice.PlaybackState == PlaybackState.Stopped)
+                // Store our radio and song for the vehicle
+                int VehicleRadio = Config.GetValue("Radios", CurrentVehicle.Model.GetHashCode().ToString(), 256);
+                string VehicleSong = Config.GetValue("Audio", CurrentVehicle.Model.GetHashCode().ToString(), string.Empty);
+                // Store our radio and song for all of them
+                int GenericRadio = Config.GetValue("General", "Radio", 256);
+                string GenericSong = Config.GetValue("General", "Audio", "null");
+
+                // Replace our vehicle values for the default ones if the user wants to
+                if (GenericSong != "null")
                 {
-                    if (!File.Exists(Path.Combine(SongLocation, Song)))
+                    VehicleSong = GenericSong;
+                }
+                else if (GenericRadio != 256)
+                {
+                    VehicleRadio = GenericRadio;
+                }
+
+                // If there is a song requested and the music is stopped, play it
+                if (VehicleSong != string.Empty && OutputDevice.PlaybackState == PlaybackState.Stopped)
+                {
+                    if (!File.Exists(Path.Combine(SongLocation, VehicleSong)))
                     {
-                        UI.Notify(string.Format(Resources.FileWarning, Song));
+                        UI.Notify(string.Format(Resources.FileWarning, VehicleSong));
                         return;
                     }
 
                     // Store our current file
-                    CurrentFile = new AudioFileReader(Path.Combine(SongLocation, Song));
+                    CurrentFile = new AudioFileReader(Path.Combine(SongLocation, VehicleSong));
                     // Initialize it
                     OutputDevice.Init(CurrentFile);
                     // And play it
                     OutputDevice.Play();
                 }
                 // Else if our default value is not 256 (aka invalid or not added), change the radio
-                else if (RadioID != 256)
+                else if (VehicleRadio != 256)
                 {
-                    Tools.SetRadioInVehicle(RadioID, CurrentVehicle);
+                    Tools.SetRadioInVehicle(VehicleRadio, CurrentVehicle);
                 }
             }
         }
