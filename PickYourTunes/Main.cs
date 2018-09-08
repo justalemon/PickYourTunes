@@ -83,8 +83,6 @@ namespace PickYourTunes
                 Vehicle PlayerCar = Game.Player.Character.GetVehicleIsTryingToEnter();
                 // Store our radio ID
                 int RadioID = Config.GetValue("Radios", PlayerCar.Model.GetHashCode().ToString(), 256);
-                // Store our radio name
-                string RadioName = Function.Call<string>(Hash.GET_RADIO_STATION_NAME, RadioID);
                 // Store our custom song
                 string Song = Config.GetValue("Audio", PlayerCar.Model.GetHashCode().ToString(), string.Empty);
                 
@@ -107,7 +105,7 @@ namespace PickYourTunes
                 // Else if our default value is not 256 (aka invalid or not added), change the radio
                 else if (RadioID != 256)
                 {
-                    Tools.SetRadioByName(RadioName, PlayerCar);
+                    Tools.SetRadioInVehicle(RadioID, PlayerCar);
                 }
             }
         }
