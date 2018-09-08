@@ -29,6 +29,10 @@ namespace PickYourTunes
         /// The file that is currently playing.
         /// </summary>
         AudioFileReader CurrentFile;
+        /// <summary>
+        /// The vehicle that the player was using previously.
+        /// </summary>
+        int PreviousVehicle;
 
         public PickYourTunes()
         {
@@ -65,7 +69,7 @@ namespace PickYourTunes
 
             // If the game is paused OR the engine is not running AND the audio is not stopped
             // Pause it, because is running and we are not in a vehicle
-            if ((Game.IsPaused || !Checks.IsEngineRunning()) && OutputDevice.PlaybackState != PlaybackState.Stopped)
+            if ((Game.IsPaused || !Checks.IsEngineRunning() || Checks.HashSameAsCurrent(PreviousVehicle)) && OutputDevice.PlaybackState != PlaybackState.Stopped)
             {
                 OutputDevice.Pause();
             }
@@ -77,14 +81,16 @@ namespace PickYourTunes
             }
             // If none of the above worked out, there is nothing playing nor loaded
             // Load the configuration value and check what is going on
-            else
+            else if (OutputDevice.PlaybackState != PlaybackState.Playing)
             {
                 // Store the vehicle that the player is getting into
-                Vehicle PlayerCar = Game.Player.Character.GetVehicleIsTryingToEnter();
+                Vehicle CurrentVehicle = Game.Player.Character.GetVehicleIsTryingToEnter();
+                // Store the hash that we have
+                PreviousVehicle = CurrentVehicle.Model.GetHashCode();
                 // Store our radio ID
-                int RadioID = Config.GetValue("Radios", PlayerCar.Model.GetHashCode().ToString(), 256);
+                int RadioID = Config.GetValue("Radios", CurrentVehicle.Model.GetHashCode().ToString(), 256);
                 // Store our custom song
-                string Song = Config.GetValue("Audio", PlayerCar.Model.GetHashCode().ToString(), string.Empty);
+                string Song = Config.GetValue("Audio", CurrentVehicle.Model.GetHashCode().ToString(), string.Empty);
                 
                 // If there is a song requested and the music is stopped, play it
                 if (Song != string.Empty && OutputDevice.PlaybackState == PlaybackState.Stopped)
@@ -105,7 +111,7 @@ namespace PickYourTunes
                 // Else if our default value is not 256 (aka invalid or not added), change the radio
                 else if (RadioID != 256)
                 {
-                    Tools.SetRadioInVehicle(RadioID, PlayerCar);
+                    Tools.SetRadioInVehicle(RadioID, CurrentVehicle);
                 }
             }
         }

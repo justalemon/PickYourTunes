@@ -30,5 +30,22 @@ namespace PickYourTunes
                 return Game.Player.Character.CurrentVehicle.EngineRunning;
             }
         }
+
+        /// <summary>
+        /// Checks if the specified hash corresponds to the player vehicle
+        /// </summary>
+        /// <param name="VHash"></param>
+        /// <returns>True if the hash is the same, False otherwise.</returns>
+        public static bool HashSameAsCurrent(int VHash)
+        {
+            if (Game.Player.Character.CurrentVehicle == null)
+            {
+                return false;
+            }
+            else
+            {
+                return Game.Player.Character.CurrentVehicle.Model.GetHashCode() == VHash;
+            }
+        }
     }
 }
