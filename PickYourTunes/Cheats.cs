@@ -25,6 +25,11 @@ namespace PickYourTunes
             {
                 UI.Notify(string.Format(Resources.CheatRadio, Function.Call<int>(Hash.GET_PLAYER_RADIO_STATION_INDEX)));
             }
+            // Change the song if is posible
+            else if (Checks.CheatHasBeenEntered("pyt next"))
+            {
+                Function.Call(Hash.SKIP_RADIO_FORWARD);
+            }
         }
     }
 }
