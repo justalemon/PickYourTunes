@@ -33,6 +33,10 @@ namespace PickYourTunes
             }
         };
         /// <summary>
+        /// List of default radios for vehicles.
+        /// </summary>
+        private List<Default> DefaultStations = new List<Default>();
+        /// <summary>
         /// The current selected radio by the user.
         /// </summary>
         private Radio Selected = null;
@@ -149,6 +153,9 @@ namespace PickYourTunes
                     UI.Notify($"List of radios loaded: {Config.Name} by {Config.Author}");
                 }
             }
+
+            // Load the default radios
+            DefaultStations = JsonConvert.DeserializeObject<List<Default>>(File.ReadAllText("scripts\\PickYourTunes\\Default.json"));
 
             // And add our events
             Tick += OnTickCheats;
