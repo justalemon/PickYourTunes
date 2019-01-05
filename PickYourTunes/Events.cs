@@ -1,4 +1,4 @@
-﻿using GTA;
+using GTA;
 using GTA.Native;
 using NAudio.Wave;
 using PickYourTunes.Items;
@@ -62,7 +62,6 @@ namespace PickYourTunes
             bool IsExitingVehicle = Function.Call<bool>(Hash.GET_IS_TASK_ACTIVE, Game.Player.Character, 2);
             bool IsEnteringVehicle = Function.Call<bool>(Hash.GET_IS_TASK_ACTIVE, Game.Player.Character, 160);
             Vehicle CurrentVehicle = Game.Player.Character.CurrentVehicle;
-            Vehicle Attempting = Game.Player.Character.GetVehicleIsTryingToEnter();
             
             // If there is a vehicle but it does not has a radio stored
             if (CurrentVehicle != null && !CurrentRadio.ContainsKey(CurrentVehicle))
