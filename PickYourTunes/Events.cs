@@ -11,7 +11,7 @@ namespace PickYourTunes
     public partial class PickYourTunes : Script
     {
         /// <summary>
-        /// 
+        /// If the Radio system is paused.
         /// </summary>
         private bool Paused = false;
 
