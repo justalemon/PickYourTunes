@@ -1,27 +1,19 @@
-[![AppVeyor](https://img.shields.io/appveyor/ci/justalemon/PickYourTunes.svg)](https://ci.appveyor.com/project/justalemon/pickyourtunes)
-[![Github All Releases](https://img.shields.io/github/downloads/justalemon/PickYourTunes/total.svg)](https://github.com/justalemon/PickYourTunes/releases)
-[![5mods](https://img.shields.io/badge/Download-5mods-1b9e42.svg)](https://www.gta5-mods.com/scripts/pickyourtunes)
+# PickYourTunes
+[![AppVeyor](https://img.shields.io/appveyor/ci/justalemon/pickyourtunes.svg?label=appveyor)](https://ci.appveyor.com/project/justalemon/pickyourtunes)
+[![CodeFactor](https://www.codefactor.io/repository/github/justalemon/pickyourtunes/badge)](https://www.codefactor.io/repository/github/justalemon/pickyourtunes)
 
-# PickYourTunes for Grand Theft Auto V
 This mod helps you to set default radio stations on vehicles with support for custom files (mp3/wav/ogg).
 
-# Building the Mod
-* Clone the repo
-* Download Visual Studio 2017 with the .NET Framework 4.7.2 SDK & Targeting Pack
-* Open the solution
-* On the top bar, select Build > Build Solution or press Ctrl+Shift+B
-* Done
+## Usage
 
-# Configurating the Mod
-
-## Getting vehicle hashes
+### Getting vehicle hashes
 **NOTE**: If you know how to get vehicle hashes, skip this
 
 1. Run the game with the Mod
 2. Get in a car and use the cheat "pyt hash"
 3. Copy the hash that has appeared over the radar
 
-## Setting Radios and custom files
+### Setting Radios and custom files
 
 1. Run the game with the mod at least once
 2. If you are going to use a Radio, copy the ID from the following table:
