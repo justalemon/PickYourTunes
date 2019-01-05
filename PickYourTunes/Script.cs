@@ -1,10 +1,16 @@
 using GTA;
 using GTA.Native;
 using NAudio.Wave;
+using Newtonsoft.Json;
+using PickYourTunes.Items;
 using PickYourTunes.Properties;
+using PickYourTunes.Streaming;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 
@@ -13,26 +19,102 @@ namespace PickYourTunes
     public class PickYourTunes : Script
     {
         /// <summary>
+        /// Player for MP3 streams.
+        /// </summary>
+        private StreamPlayer Streaming = new StreamPlayer();
+        /// <summary>
+        /// List of radios added by the user.
+        /// </summary>
+        private List<Radio> Radios = new List<Radio>
+        {
+            new Radio()
+            {
+                Name = "Radio Off",
+                Frequency = 0,
+                Type = RadioType.Vanilla,
+                ID = 255
+            }
+        };
+        /// <summary>
+        /// The current selected radio by the user.
+        /// </summary>
+        private Radio Selected = null;
+        /// <summary>
+        /// The output device for music files.
+        /// </summary>
+        private WaveOutEvent MusicOutput = new WaveOutEvent();
+        /// <summary>
+        /// The output device for radio announcements.
+        /// </summary>
+        private WaveOutEvent AdsOutput = new WaveOutEvent();
+        /// <summary>
+        /// The current local file.
+        /// </summary>
+        private WaveStream MusicFile = null;
+        /// <summary>
+        /// The stored progress for the radios.
+        /// </summary>
+        private Dictionary<Radio, TimeSpan> Progress = new Dictionary<Radio, TimeSpan>();
+        /// <summary>
+        /// The current song for the radios that allow it.
+        /// </summary>
+        private Dictionary<Radio, Song> CurrentSong = new Dictionary<Radio, Song>();
+        /// <summary>
+        /// A random number generator.
+        /// </summary>
+        private Random Randomizer = new Random();
+        /// <summary>
         /// The mod configuration.
         /// </summary>
-        ScriptSettings Config = ScriptSettings.Load("scripts\\PickYourTunes.ini");
+        private ScriptSettings Config = ScriptSettings.Load("scripts\\PickYourTunes.ini");
         /// <summary>
         /// The location where our sounds are loaded.
         /// Usually <GTA V>\scripts\PickYourTunes
         /// </summary>
-        string SongLocation = new Uri(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), "PickYourTunes")).LocalPath;
+        private string SongLocation = new Uri(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), "PickYourTunes")).LocalPath;
         /// <summary>
         /// Our instance of WaveOutEvent that plays our custom files.
         /// </summary>
-        WaveOutEvent OutputDevice = new WaveOutEvent();
+        private WaveOutEvent OutputDevice = new WaveOutEvent();
         /// <summary>
         /// The file that is currently playing.
         /// </summary>
-        AudioFileReader CurrentFile;
+        private AudioFileReader CurrentFile;
         /// <summary>
         /// The vehicle that the player was using previously.
         /// </summary>
-        int PreviousVehicle;
+        private int PreviousVehicle;
+
+        /// <summary>
+        /// The previous radio.
+        /// </summary>
+        public Radio Previous
+        {
+            get
+            {
+                // Get the index of the current radio
+                int CurrentIndex = Radios.IndexOf(Selected);
+                // Get the index of the previous item
+                int CorrectIndex = CurrentIndex == 0 ? Radios.Count - 1 : CurrentIndex - 1;
+                // Return the correct item
+                return Radios[CorrectIndex];
+            }
+        }
+        /// <summary>
+        /// The next radio.
+        /// </summary>
+        public Radio Next
+        {
+            get
+            {
+                // Get the index of the current radio
+                int CurrentIndex = Radios.IndexOf(Selected);
+                // Get the index of the next item
+                int CorrectIndex = CurrentIndex == Radios.Count - 1 ? 0 : CurrentIndex + 1;
+                // Return the correct item
+                return Radios[CorrectIndex];
+            }
+        }
 
         public PickYourTunes()
         {
@@ -42,10 +124,43 @@ namespace PickYourTunes
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
             CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
-            // Set our events for the script and player
-            Tick += OnTick;
+            // Open the JSON files for reading
+            foreach (string File in Directory.GetFiles("scripts\\PickYourTunes\\Radios", "*.json"))
+            {
+                // Open the JSON files for reading
+                using (StreamReader Reader = new StreamReader(File))
+                {
+                    // Read the file content
+                    string JSON = Reader.ReadToEnd();
+                    // Parse it
+                    ConfigFile Config = JsonConvert.DeserializeObject<ConfigFile>(JSON);
+                    // And add it onto the existing list of radios
+                    Radios.AddRange(Config.Radios);
+                    // Notify that we have loaded the file
+                    UI.Notify($"List of radios loaded: {Config.Name} by {Config.Author}");
+                }
+            }
+
+            // And add our events
+            Tick += OnTickFixes;
+            Tick += OnTickControls;
+            Tick += OnTickDraw;
             Tick += Cheats.OnCheat;
-            OutputDevice.PlaybackStopped += OnStop;
+            MusicOutput.PlaybackStopped += OnFileStop;
+            Aborted += (Sender, Args) => { Streaming.Stop(); };
+
+            // Enable the mobile phone radio
+            Function.Call(Hash.SET_MOBILE_PHONE_RADIO_STATE, true);
+
+            // Set the selected radio as off, just in case
+            Selected = Radios[0];
+            Game.RadioStation = RadioStation.RadioOff;
+
+            // Order the radios by frequency
+            Radios = Radios.OrderBy(X => X.Frequency).ToList();
+
+            // Show the count of radios to the user
+            UI.Notify($"Radios available: {Radios.Count}");
             
             // Set the volume to the configuration value
             OutputDevice.Volume = Config.GetValue("General", "Volume", 0.2f);
@@ -58,86 +173,122 @@ namespace PickYourTunes
             }
         }
 
-        private void OnTick(object Sender, EventArgs Args)
+        private void OnTickFixes(object Sender, EventArgs Args)
         {
-            // Just a hack recommended by "Slick" on the 5mods server to keep the radio disabled
-            // "I made my own by setting the radio per tick, not the best way but hey it works"
-            if (OutputDevice.PlaybackState == PlaybackState.Playing && Game.Player.Character.CurrentVehicle != null)
-            {
-                Function.Call(Hash.SET_VEH_RADIO_STATION, Game.Player.Character.CurrentVehicle, "OFF");
-            }
+            // Enable the mobile radio this tick
+            Function.Call(Hash.SET_MOBILE_RADIO_ENABLED_DURING_GAMEPLAY, true);
 
-            // If the game is paused OR the engine is not running AND the audio is not stopped
-            // Pause it, because is running and we are not in a vehicle
-            if ((Game.IsPaused || !Checks.IsEngineRunning() || Checks.HashSameAsCurrent(PreviousVehicle)) && OutputDevice.PlaybackState != PlaybackState.Stopped)
+            // Cheat for changing the song to the next one
+            if (Function.Call<bool>(Hash._0x557E43C447E700A8, Game.GenerateHash("sr next")))
             {
-                OutputDevice.Pause();
-            }
-            // If the statement above didn't worked (not paused but on a running vehicle)
-            // Resume the playback
-            else if (OutputDevice.PlaybackState == PlaybackState.Paused)
-            {
-                OutputDevice.Play();
-            }
-            // If none of the above worked out, there is nothing playing nor loaded
-            // Load the configuration value and check what is going on
-            else if (OutputDevice.PlaybackState != PlaybackState.Playing)
-            {
-                // Store the vehicle that the player is getting into
-                Vehicle CurrentVehicle = Game.Player.Character.GetVehicleIsTryingToEnter();
-                // Store the hash that we have
-                PreviousVehicle = CurrentVehicle.Model.GetHashCode();
-                // Store our radio and song for the vehicle
-                int VehicleRadio = Config.GetValue("Radios", CurrentVehicle.Model.GetHashCode().ToString(), 256);
-                string VehicleSong = Config.GetValue("Audio", CurrentVehicle.Model.GetHashCode().ToString(), string.Empty);
-                // Store our radio and song for all of them
-                int GenericRadio = Config.GetValue("General", "Radio", 256);
-                string GenericSong = Config.GetValue("General", "Audio", "null");
-
-                // Replace our vehicle values for the default ones if the user wants to
-                if (GenericSong != "null")
+                if (Selected.Type == RadioType.Radio)
                 {
-                    VehicleSong = GenericSong;
-                }
-                else if (GenericRadio != 256)
-                {
-                    VehicleRadio = GenericRadio;
-                }
-
-                // If there is a song requested and the music is stopped, play it
-                if (VehicleSong != string.Empty && OutputDevice.PlaybackState == PlaybackState.Stopped)
-                {
-                    if (!File.Exists(Path.Combine(SongLocation, VehicleSong)))
-                    {
-                        UI.Notify(string.Format(Resources.FileWarning, VehicleSong));
-                        return;
-                    }
-
-                    // Store our current file
-                    CurrentFile = new AudioFileReader(Path.Combine(SongLocation, VehicleSong));
-                    // Initialize it
-                    OutputDevice.Init(CurrentFile);
-                    // And play it
-                    OutputDevice.Play();
-                }
-                // Else if our default value is not 256 (aka invalid or not added), change the radio
-                else if (VehicleRadio != 256)
-                {
-                    Tools.SetRadioInVehicle(VehicleRadio, CurrentVehicle);
+                    MusicFile.CurrentTime = MusicFile.TotalTime;
                 }
             }
         }
 
-        private void OnStop(object Sender, StoppedEventArgs Args)
+        private void OnTickControls(object Sender, EventArgs Args)
         {
-            // if the current file exists
-            if (CurrentFile != null)
+            // Disable the weapon wheel
+            Game.DisableControlThisFrame(0, Control.VehicleRadioWheel);
+            Game.DisableControlThisFrame(0, Control.VehicleNextRadio);
+            Game.DisableControlThisFrame(0, Control.VehiclePrevRadio);
+
+            // Check if a control has been pressed
+            if (Game.IsDisabledControlJustPressed(0, Control.VehicleRadioWheel) || Game.IsDisabledControlJustPressed(0, Control.VehicleNextRadio))
             {
-                // Dispose it
-                CurrentFile.Dispose();
-                // And remove it
-                CurrentFile = null;
+                NextRadio();
             }
+        }
+
+        private void OnTickDraw(object Sender, EventArgs Args)
+        {
+            // If there is a frequency, add it at the end like every normal radio ad
+            string RadioName = Selected.Frequency == 0 ? Selected.Name : Selected.Name + " " + Selected.Frequency.ToString();
+
+            // Draw the previous, current and next radio name
+            UIText PreviousUI = new UIText(Previous.Name, new Point((int)(UI.WIDTH * .5f), (int)(UI.HEIGHT * .025f)), .5f, Color.LightGray, GTA.Font.ChaletLondon, true, true, false);
+            PreviousUI.Draw();
+            UIText CurrentUI = new UIText(RadioName, new Point((int)(UI.WIDTH * .5f), (int)(UI.HEIGHT * .055f)), .6f, Color.White, GTA.Font.ChaletLondon, true, true, false);
+            CurrentUI.Draw();
+            UIText NextUI = new UIText(Next.Name, new Point((int)(UI.WIDTH * .5f), (int)(UI.HEIGHT * .09f)), .5f, Color.LightGray, GTA.Font.ChaletLondon, true, true, false);
+            NextUI.Draw();
+        }
+
+        private void OnFileStop(object Sender, StoppedEventArgs Args)
+        {
+            if (MusicFile.TotalTime == MusicFile.CurrentTime && Selected.Type == RadioType.Radio)
+            {
+                CurrentSong[Selected] = Selected.Songs[Randomizer.Next(Selected.Songs.Count)];
+                MusicFile = new MediaFoundationReader(Selected.Location + "\\" + CurrentSong[Selected].File);
+                MusicOutput.Init(MusicFile);
+                MusicOutput.Play();
+            }
+        }
+
+        private void NextRadio()
+        {
+            // If there is a long file currently playing, store the playback status
+            if (MusicOutput.PlaybackState == PlaybackState.Playing)
+            {
+                Progress[Selected] = MusicFile.CurrentTime;
+            }
+
+            // Stop the streaming radio and local file
+            Streaming.Stop();
+            MusicOutput.Stop();
+
+            // Is the next radio is vanilla
+            if (Next.Type == RadioType.Vanilla)
+            {
+                Game.RadioStation = (RadioStation)Next.ID;
+            }
+            // If the radio is a single large file
+            else if (Next.Type == RadioType.SingleFile || Next.Type == RadioType.Radio)
+            {
+                Game.RadioStation = RadioStation.RadioOff;
+                if (MusicFile != null)
+                {
+                    MusicFile.Dispose();
+                }
+                if (Next.Type == RadioType.Radio && !CurrentSong.ContainsKey(Next))
+                {
+                    CurrentSong[Next] = Next.Songs[Randomizer.Next(Next.Songs.Count)];
+                }
+                string SongFile = Next.Type == RadioType.SingleFile ? Next.Location : Next.Location + "\\" + CurrentSong[Next].File;
+                // "The data specified for the media type is invalid, inconsistent, or not supported by this object." with MediaFoundationReader
+                if (Next.CodecFix)
+                {
+                    WaveFileReader TempWave = new WaveFileReader(SongFile);
+                    MusicFile = WaveFormatConversionStream.CreatePcmStream(TempWave);
+                }
+                else
+                {
+                    MusicFile = new MediaFoundationReader(SongFile);
+                }
+                MusicOutput.Init(MusicFile);
+                if (Progress.ContainsKey(Next))
+                {
+                    MusicFile.CurrentTime = Progress[Next];
+                }
+                else
+                {
+                    int RandomPosition = Randomizer.Next((int)MusicFile.TotalTime.TotalSeconds);
+                    TimeSpan RandomTimeSpan = TimeSpan.FromSeconds(RandomPosition);
+                    MusicFile.CurrentTime = RandomTimeSpan;
+                }
+                MusicOutput.Play();
+            }
+            // If the radio is a stream
+            else if (Next.Type == RadioType.Stream)
+            {
+                Game.RadioStation = RadioStation.RadioOff;
+                Streaming.Play(Next.Location);
+            }
+
+            // Set the next radio as the selected one
+            Selected = Next;
         }
     }
 }
