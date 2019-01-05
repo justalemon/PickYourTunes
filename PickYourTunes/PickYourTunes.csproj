@@ -65,6 +65,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Streaming\FullStream.cs" />
+    <Compile Include="Streaming\Player.cs" />
     <Compile Include="Tools.cs" />
   </ItemGroup>
   <ItemGroup>
