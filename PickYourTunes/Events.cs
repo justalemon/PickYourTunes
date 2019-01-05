@@ -1,4 +1,4 @@
-﻿using GTA;
+using GTA;
 using GTA.Native;
 using NAudio.Wave;
 using PickYourTunes.Properties;
@@ -41,7 +41,7 @@ namespace PickYourTunes
             // Check if a control has been pressed
             if (Game.IsDisabledControlJustPressed(0, Control.VehicleRadioWheel) || Game.IsDisabledControlJustPressed(0, Control.VehicleNextRadio))
             {
-                NextRadio();
+                PlayRadio(Next);
             }
         }
 

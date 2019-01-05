@@ -1,5 +1,6 @@
 ﻿using GTA;
 using NAudio.Wave;
+using PickYourTunes.Items;
 using System;
 using System.IO;
 
@@ -7,7 +8,7 @@ namespace PickYourTunes
 {
     public partial class PickYourTunes : Script
     {
-        private void NextRadio()
+        private void PlayRadio(Radio SelectedRadio, bool Store = true)
         {
             // If there is a long file currently playing, store the playback status
             if (MusicOutput.PlaybackState == PlaybackState.Playing)
@@ -19,31 +20,31 @@ namespace PickYourTunes
             Streaming.Stop();
             MusicOutput.Stop();
 
-            // Is the next radio is vanilla
-            if (Next.Type == RadioType.Vanilla)
+            // If the chosen radio is vanilla
+            if (SelectedRadio.Type == RadioType.Vanilla)
             {
-                Game.RadioStation = (RadioStation)Next.ID;
+                Game.RadioStation = (RadioStation)SelectedRadio.ID;
             }
             // If the radio is a single large file
-            else if (Next.Type == RadioType.SingleFile || Next.Type == RadioType.Radio)
+            else if (SelectedRadio.Type == RadioType.SingleFile || SelectedRadio.Type == RadioType.Radio)
             {
                 Game.RadioStation = RadioStation.RadioOff;
                 if (MusicFile != null)
                 {
                     MusicFile.Dispose();
                 }
-                if (Next.Type == RadioType.Radio && !CurrentSong.ContainsKey(Next))
+                if (SelectedRadio.Type == RadioType.Radio && !CurrentSong.ContainsKey(SelectedRadio))
                 {
-                    CurrentSong[Next] = Next.Songs[Randomizer.Next(Next.Songs.Count)];
+                    CurrentSong[SelectedRadio] = SelectedRadio.Songs[Randomizer.Next(SelectedRadio.Songs.Count)];
                 }
-                string SongFile = Next.Type == RadioType.SingleFile ? Path.Combine(DataFolder, "Radios", Next.Location) : Path.Combine(DataFolder, "Radios", Next.Location, CurrentSong[Next].File);
+                string SongFile = SelectedRadio.Type == RadioType.SingleFile ? Path.Combine(DataFolder, "Radios", SelectedRadio.Location) : Path.Combine(DataFolder, "Radios", SelectedRadio.Location, CurrentSong[SelectedRadio].File);
                 if (!File.Exists(SongFile))
                 {
                     UI.Notify($"Error: The file {SongFile} does not exists");
                     goto FinishChange;
                 }
                 // "The data specified for the media type is invalid, inconsistent, or not supported by this object." with MediaFoundationReader
-                if (Next.CodecFix)
+                if (SelectedRadio.CodecFix)
                 {
                     WaveFileReader TempWave = new WaveFileReader(SongFile);
                     MusicFile = WaveFormatConversionStream.CreatePcmStream(TempWave);
@@ -53,9 +54,9 @@ namespace PickYourTunes
                     MusicFile = new MediaFoundationReader(SongFile);
                 }
                 MusicOutput.Init(MusicFile);
-                if (Progress.ContainsKey(Next))
+                if (Progress.ContainsKey(SelectedRadio))
                 {
-                    MusicFile.CurrentTime = Progress[Next];
+                    MusicFile.CurrentTime = Progress[SelectedRadio];
                 }
                 else
                 {
@@ -66,15 +67,18 @@ namespace PickYourTunes
                 MusicOutput.Play();
             }
             // If the radio is a stream
-            else if (Next.Type == RadioType.Stream)
+            else if (SelectedRadio.Type == RadioType.Stream)
             {
                 Game.RadioStation = RadioStation.RadioOff;
-                Streaming.Play(Next.Location);
+                Streaming.Play(SelectedRadio.Location);
             }
 
-            // Set the next radio as the selected one
+            // Set the next radio as the selected one if is required
             FinishChange:
-            Selected = Next;
+            if (Store)
+            {
+                Selected = SelectedRadio;
+            }
         }
     }
 }
