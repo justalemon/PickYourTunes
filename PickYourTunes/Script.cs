@@ -148,7 +148,6 @@ namespace PickYourTunes
                             UI.Notify($"Warning: The radio '{NewRadio.Name}' was not added because it does not has a valid UUID.");
                         }
                     }
-                    Radios.AddRange(Config.Radios);
                     // Notify that we have loaded the file
                     UI.Notify($"List of radios loaded: {Config.Name} by {Config.Author}");
                 }
