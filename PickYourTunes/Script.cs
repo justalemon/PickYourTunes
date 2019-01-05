@@ -147,7 +147,7 @@ namespace PickYourTunes
             Tick += OnTickDraw;
             Tick += OnTickSelect;
             MusicOutput.PlaybackStopped += OnFileStop;
-            Aborted += (Sender, Args) => { Streaming.Stop(); };
+            Aborted += (Sender, Args) => { PlayRadio(Radios[0]); };
 
             // Set the selected radio as off, just in case
             Selected = Radios[0];
