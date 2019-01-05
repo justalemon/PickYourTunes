@@ -161,9 +161,6 @@ namespace PickYourTunes
             MusicOutput.PlaybackStopped += OnFileStop;
             Aborted += (Sender, Args) => { Streaming.Stop(); };
 
-            // Enable the mobile phone radio
-            Function.Call(Hash.SET_MOBILE_PHONE_RADIO_STATE, true);
-
             // Set the selected radio as off, just in case
             Selected = Radios[0];
             Game.RadioStation = RadioStation.RadioOff;
@@ -187,9 +184,6 @@ namespace PickYourTunes
 
         private void OnTickFixes(object Sender, EventArgs Args)
         {
-            // Enable the mobile radio this tick
-            Function.Call(Hash.SET_MOBILE_RADIO_ENABLED_DURING_GAMEPLAY, true);
-
             // Cheat for changing the song to the next one
             if (Function.Call<bool>(Hash._0x557E43C447E700A8, Game.GenerateHash("sr next")))
             {
