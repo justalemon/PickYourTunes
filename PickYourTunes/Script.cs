@@ -154,10 +154,9 @@ namespace PickYourTunes
             }
 
             // And add our events
-            Tick += OnTickFixes;
+            Tick += OnTickCheats;
             Tick += OnTickControls;
             Tick += OnTickDraw;
-            Tick += Cheats.OnCheat;
             MusicOutput.PlaybackStopped += OnFileStop;
             Aborted += (Sender, Args) => { Streaming.Stop(); };
 
@@ -182,15 +181,24 @@ namespace PickYourTunes
             }
         }
 
-        private void OnTickFixes(object Sender, EventArgs Args)
+        private void OnTickCheats(object Sender, EventArgs Args)
         {
-            // Cheat for changing the song to the next one
-            if (Function.Call<bool>(Hash._0x557E43C447E700A8, Game.GenerateHash("sr next")))
+            // Change the song to the next one
+            if (Function.Call<bool>(Hash._0x557E43C447E700A8, Game.GenerateHash("pyt next")))
             {
                 if (Selected.Type == RadioType.Radio)
                 {
                     MusicFile.CurrentTime = MusicFile.TotalTime;
                 }
+                else if (Selected.Type == RadioType.Vanilla)
+                {
+                    Function.Call(Hash.SKIP_RADIO_FORWARD);
+                }
+            }
+            // Show the vehicle hash
+            else if (Checks.CheatHasBeenEntered("pyt hash"))
+            {
+                UI.Notify(string.Format(Resources.CheatHash, Game.Player.Character.CurrentVehicle.Model.GetHashCode()));
             }
         }
 
