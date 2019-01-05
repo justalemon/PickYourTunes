@@ -1,0 +1,143 @@
+{
+    "name": "EFLC Radios",
+    "author": "Lemon",
+    "radios": [
+        {
+            "name": "Electro-Choc (IV)",
+            "frequency": 102.1,
+            "type": 1,
+            "loc": "scripts\\SimpleRadio\\GTAIV\\ElectroChocIV\\FK.wav"
+        },
+        {
+            "name": "Electro-Choc (EFLC)",
+            "frequency": 102.1,
+            "type": 1,
+            "loc": "scripts\\SimpleRadio\\GTAIV\\ElectroChocELFC\\THE_CROOKERS_MIX_32K.wav"
+        },
+        {
+            "name": "San Juan Sounds (EFLC)",
+            "frequency": 96.3,
+            "type": 1,
+            "loc": "scripts\\SimpleRadio\\GTAIV\\SanJuanSoundsEFLC\\SANTIAGO_SOUNDS.wav"
+        },
+        {
+            "name": "Liberty City Hardcore (EFLC)",
+            "frequency": 88.1,
+            "type": 1,
+            "loc": "scripts\\SimpleRadio\\GTAIV\\LibertyCityHardcoreEFLC\\LCHC_32K_PH.wav"
+        },
+        {
+            "name": "RamJam FM (EFLC)",
+            "frequency": 99.7,
+            "type": 1,
+            "loc": "scripts\\SimpleRadio\\GTAIV\\RamJamFM\\RAMJAM_MIX.wav"
+        },
+        {
+            "name": "The Beat (IV)",
+            "frequency": 102.7,
+            "type": 1,
+            "loc": "scripts\\SimpleRadio\\GTAIV\\TheBeatIV\\BEAT.wav"
+        },
+        {
+            "name": "The Beat (EFLC)",
+            "frequency": 102.7,
+            "type": 1,
+            "loc": "scripts\\SimpleRadio\\GTAIV\\TheBeatEFLC\\1_FLEX32K.wav"
+        },
+        {
+            "name": "The Classics (IV)",
+            "frequency": 104.1,
+            "type": 1,
+            "loc": "scripts\\SimpleRadio\\GTAIV\\TheClassics\\CLASSICS_MIX.wav"
+        },
+        {
+            "name": "Vladivostok FM (EFLC)",
+            "frequency": 100.8,
+            "type": 1,
+            "loc": "scripts\\SimpleRadio\\GTAIV\\VladivostokEFLC\\EUROBEAT.wav"
+        },
+        {
+            "name": "Massive B Soundsystem (IV)",
+            "frequency": 96.9,
+            "type": 1,
+            "loc": "scripts\\SimpleRadio\\GTAIV\\MassiveBSoundsystem\\MASSIVEB_MIX.wav"
+        },
+        {
+            "name": "Vladivostok FM (IV)",
+            "frequency": 100.8,
+            "type": 3,
+            "loc": "scripts\\SimpleRadio\\GTAIV\\VladivostokIV",
+            "songs": [
+                {
+                    "file": "ADD_SPEED.wav"
+                },
+                {
+                    "file": "BEGU_RANCHO_SONG.wav"
+                },
+                {
+                    "file": "CHIKI.wav"
+                },
+                {
+                    "file": "GNISVOULINIU.wav"
+                },
+                {
+                    "file": "HOT_SUMMER.wav"
+                },
+                {
+                    "file": "KARAOKE.wav"
+                },
+                {
+                    "file": "KINGRING.wav"
+                },
+                {
+                    "file": "KINO.wav"
+                },
+                {
+                    "file": "KVARTIRA.wav"
+                },
+                {
+                    "file": "LIBERTYCITY.wav"
+                },
+                {
+                    "file": "MAMA.wav"
+                },
+                {
+                    "file": "MON_AMI.wav"
+                },
+                {
+                    "file": "NIKOGONE.wav"
+                },
+                {
+                    "file": "NOCHJU.wav"
+                },
+                {
+                    "file": "OTEBE.wav"
+                },
+                {
+                    "file": "PLAY.wav"
+                },
+                {
+                    "file": "REP.wav"
+                },
+                {
+                    "file": "REPREZENTY.wav"
+                },
+                {
+                    "file": "RIFFMASTER_TONY.wav"
+                },
+                {
+                    "file": "SHVAYNE.wav"
+                },
+                {
+                    "file": "UNDERGROUND.wav"
+                },
+                {
+                    "file": "WILD_HORSES.wav"
+                },
+                {
+                    "file": "ZELENOGLAZOE_TAKSI.wav"
+                }
+            ]
+        }
+    ]
+}

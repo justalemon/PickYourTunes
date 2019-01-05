@@ -1,0 +1,66 @@
+{
+    "name": "Chilean Radios",
+    "author": "Lemon",
+    "radios": [
+        {
+            "name": "Radio Candela",
+            "frequency": 95.3,
+            "type": 2,
+            "loc": "http://unlimited11-cl.dps.live/candela/mp3/icecast.audio"
+        },
+        {
+            "name": "Los 40 Principales",
+            "frequency": 101.7,
+            "type": 2,
+            "loc": "https://18493.live.streamtheworld.com/LOS40_CHILE_SC"
+        },
+        {
+            "name": "Radio Bio Bio",
+            "frequency": 99.7,
+            "type": 2,
+            "loc": "http://unlimited3-cl.dps.live/biobiosantiago/mp3/icecast.audio"
+        },
+        {
+            "name": "Radio Corazon",
+            "frequency": 101.3,
+            "type": 2,
+            "loc": "https://15383.live.streamtheworld.com/CORAZON_SC"
+        },
+        {
+            "name": "Radio Disney",
+            "frequency": 104.9,
+            "type": 2,
+            "loc": "https://redirector.dps.live/disney/mp364k/icecast.audio"
+        },
+        {
+            "name": "Radio Cooperativa",
+            "frequency": 106.7,
+            "type": 2,
+            "loc": "http://redirector.dps.live/cooperativafm/mp3/icecast.audio"
+        },
+        {
+            "name": "Radio Activa",
+            "frequency": 92.5,
+            "type": 2,
+            "loc": "https://18053.live.streamtheworld.com/ACTIVA_SC"
+        },
+        {
+            "name": "Romantica FM",
+            "frequency": 104.1,
+            "type": 2,
+            "loc": "http://unlimited3-cl.dps.live/romantica/mp3/icecast.audio"
+        },
+        {
+            "name": "Imagina FM",
+            "frequency": 88.1,
+            "type": 2,
+            "loc": "https://18913.live.streamtheworld.com/IMAGINA_SC"
+        },
+        {
+            "name": "Rock and Pop FM",
+            "frequency": 94.1,
+            "type": 2,
+            "loc": "https://20843.live.streamtheworld.com/ROCK_AND_POP_SC"
+        }
+    ]
+}

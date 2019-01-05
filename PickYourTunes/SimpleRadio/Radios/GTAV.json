@@ -1,0 +1,120 @@
+{
+    "name": "Vanilla Radios",
+    "author": "Lemon",
+    "radios": [
+        {
+            "name": "Los Santos Rock Radio",
+            "frequency": 102.3,
+            "type": 0,
+            "id": 0
+        },
+        {
+            "name": "Non Stop Pop FM",
+            "frequency": 100.7,
+            "type": 0,
+            "id": 1
+        },
+        {
+            "name": "Radio Los Santos",
+            "frequency": 106.1,
+            "type": 0,
+            "id": 2
+        },
+        {
+            "name": "Channel X",
+            "frequency": 99.1,
+            "type": 0,
+            "id": 3
+        },
+        {
+            "name": "Rebel Radio",
+            "frequency": 101.9,
+            "type": 0,
+            "id": 5
+        },
+        {
+            "name": "Soulwax FM",
+            "frequency": 99.9,
+            "type": 0,
+            "id": 6
+        },
+        {
+            "name": "East Los FM",
+            "frequency": 106.2,
+            "type": 0,
+            "id": 7
+        },
+        {
+            "name": "West Coast Classics",
+            "frequency": 95.6,
+            "type": 0,
+            "id": 8
+        },
+        {
+            "name": "The Blue Ark",
+            "frequency": 89.7,
+            "type": 0,
+            "id": 10
+        },
+        {
+            "name": "WorldWide FM",
+            "frequency": 90.2,
+            "type": 0,
+            "id": 11
+        },
+        {
+            "name": "Flylo FM",
+            "frequency": 95.8,
+            "type": 0,
+            "id": 12
+        },
+        {
+            "name": "The Lowdown",
+            "frequency": 91.1,
+            "type": 0,
+            "id": 13
+        },
+        {
+            "name": "Radio Mirror Park",
+            "frequency": 88.9,
+            "type": 0,
+            "id": 14
+        },
+        {
+            "name": "Space",
+            "frequency": 103.2,
+            "type": 0,
+            "id": 15
+        },
+        {
+            "name": "Vinewood Boulevard Radio",
+            "frequency": 105.1,
+            "type": 0,
+            "id": 16
+        },
+        {
+            "name": "Self Radio",
+            "frequency": 104.3,
+            "type": 0,
+            "id": 17
+        },
+        {
+            "name": "The Lab",
+            "frequency": 94.5,
+            "type": 0,
+            "id": 18
+        },
+        {
+            "name": "Blonded Los Santos",
+            "frequency": 97.8,
+            "type": 0,
+            "id": 19
+        },
+        {
+            "name": "Los Santos Underground Radio",
+            "frequency": 98.4,
+            "type": 0,
+            "id": 20
+        }
+    ]
+}
