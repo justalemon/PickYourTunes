@@ -8,6 +8,14 @@ namespace PickYourTunes
 {
     public partial class PickYourTunes : Script
     {
+        private void PlayRandomRadio()
+        {
+            // Get a random radio from the list
+            Radio RandomRadio = Radios[Randomizer.Next(Radios.Count)];
+            // And play that radio
+            PlayRadio(RandomRadio);
+        }
+
         private void PlayRadio(Radio SelectedRadio, bool Store = true)
         {
             // If there is a long file currently playing, store the playback status
