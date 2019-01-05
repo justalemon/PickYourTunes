@@ -65,10 +65,6 @@ namespace PickYourTunes
         /// </summary>
         private Random Randomizer = new Random();
         /// <summary>
-        /// The mod configuration.
-        /// </summary>
-        private ScriptSettings Config = ScriptSettings.Load("scripts\\PickYourTunes.ini");
-        /// <summary>
         /// The location where our data is located.
         /// Usually <GTA V>\scripts\PickYourTunes
         /// </summary>
@@ -174,9 +170,6 @@ namespace PickYourTunes
 
             // Show the count of radios to the user
             UI.Notify($"Radios available: {Radios.Count}");
-            
-            // Set the volume to the configuration value
-            OutputDevice.Volume = Config.GetValue("General", "Volume", 0.2f);
 
             // Check that the directory with our scripts exists
             // If not, create it
