@@ -277,7 +277,7 @@ namespace PickYourTunes
                 string SongFile = Next.Type == RadioType.SingleFile ? Next.Location : Next.Location + "\\" + CurrentSong[Next].File;
                 if (!File.Exists(SongFile))
                 {
-                    UI.ShowSubtitle($"Error: The file {SongFile} does not exists");
+                    UI.Notify($"Error: The file {SongFile} does not exists");
                     goto FinishChange;
                 }
                 // "The data specified for the media type is invalid, inconsistent, or not supported by this object." with MediaFoundationReader
