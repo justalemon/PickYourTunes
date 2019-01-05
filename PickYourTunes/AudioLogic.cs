@@ -8,12 +8,10 @@ namespace PickYourTunes
 {
     public partial class PickYourTunes : Script
     {
-        private void PlayRandomRadio()
+        private Radio GetRandomRadio()
         {
             // Get a random radio from the list
-            Radio RandomRadio = Radios[Randomizer.Next(Radios.Count)];
-            // And play that radio
-            PlayRadio(RandomRadio);
+            return Radios[Randomizer.Next(Radios.Count)];
         }
 
         private void PlayRadio(Radio SelectedRadio, bool Store = true)
