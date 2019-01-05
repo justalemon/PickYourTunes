@@ -67,7 +67,7 @@ namespace PickYourTunes
             if (CurrentVehicle != null && !CurrentRadio.ContainsKey(CurrentVehicle))
             {
                 // See if the User has configured a radio by trying to get the values
-                Default Custom = DefaultStations.Find(X => X.Hash == CurrentVehicle.Model.Hash);
+                Default Custom = DefaultStations.Find(X => X.Hash == CurrentVehicle.Model.GetHashCode());
 
                 // If there is an entry on the custom radios and is more than one
                 if (Custom != null && Custom.Radios.Count < 0)
