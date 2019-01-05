@@ -112,6 +112,11 @@ namespace PickYourTunes.Streaming
                                 FullyDownloaded = true;
                                 break;
                             }
+                            // We tried to read the file prior to downloading it
+                            catch (IOException)
+                            {
+                                break;
+                            }
                             // If we get a web exception, break the do
                             // Original Message: Probably we have aborted download from the GUI thread
                             catch (WebException)
