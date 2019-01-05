@@ -4,60 +4,70 @@
     "radios": [
         {
             "name": "Radio Candela",
+            "uuid": "83862df5-0615-451e-8ab3-110d02d6df66",
             "frequency": 95.3,
             "type": 2,
             "loc": "http://unlimited11-cl.dps.live/candela/mp3/icecast.audio"
         },
         {
             "name": "Los 40 Principales",
+            "uuid": "90be80d0-a699-42f0-adde-89b12e4c15d0",
             "frequency": 101.7,
             "type": 2,
             "loc": "https://18493.live.streamtheworld.com/LOS40_CHILE_SC"
         },
         {
             "name": "Radio Bio Bio",
+            "uuid": "7a346eff-72cc-473a-878a-f0662af76b30",
             "frequency": 99.7,
             "type": 2,
             "loc": "http://unlimited3-cl.dps.live/biobiosantiago/mp3/icecast.audio"
         },
         {
             "name": "Radio Corazon",
+            "uuid": "9bf2ee23-1dd3-4eb1-a8b9-611c19a44928",
             "frequency": 101.3,
             "type": 2,
             "loc": "https://15383.live.streamtheworld.com/CORAZON_SC"
         },
         {
             "name": "Radio Disney",
+            "uuid": "a28cabca-34b5-4f49-857c-09e89b514c79",
             "frequency": 104.9,
             "type": 2,
             "loc": "https://redirector.dps.live/disney/mp364k/icecast.audio"
         },
         {
             "name": "Radio Cooperativa",
+            "uuid": "5eccbf3a-db96-42b4-a049-14269649a1c6",
             "frequency": 106.7,
             "type": 2,
             "loc": "http://redirector.dps.live/cooperativafm/mp3/icecast.audio"
         },
         {
             "name": "Radio Activa",
+            "uuid": "5272bcd7-eb8b-4522-8756-594874d520c4",
             "frequency": 92.5,
             "type": 2,
             "loc": "https://18053.live.streamtheworld.com/ACTIVA_SC"
         },
         {
             "name": "Romantica FM",
+            "uuid": "29fc7224-0ca9-46c3-a96c-11b682c7bf93",
             "frequency": 104.1,
             "type": 2,
             "loc": "http://unlimited3-cl.dps.live/romantica/mp3/icecast.audio"
         },
         {
             "name": "Imagina FM",
+            "uuid": "64ea5338-552e-459e-906d-f3e2a045e80f",
             "frequency": 88.1,
             "type": 2,
             "loc": "https://18913.live.streamtheworld.com/IMAGINA_SC"
         },
         {
             "name": "Rock and Pop FM",
+            "uuid": "b3d9422a-1c80-4816-bef7-3c991c1a2ce4",
             "frequency": 94.1,
             "type": 2,
             "loc": "https://20843.live.streamtheworld.com/ROCK_AND_POP_SC"

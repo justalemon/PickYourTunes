@@ -4,6 +4,7 @@
     "radios": [
         {
             "name": "Chatterbox FM",
+            "uuid": "de74edb2-5b54-46bb-82ad-feec9f9c2526",
             "codec_fix": true,
             "frequency": 109.0,
             "type": 1,
@@ -11,6 +12,7 @@
         },
         {
             "name": "Double Clef FM",
+            "uuid": "a997a036-2abf-4a28-be4a-26590ca04011",
             "codec_fix": true,
             "frequency": 109.4,
             "type": 1,
@@ -18,6 +20,7 @@
         },
         {
             "name": "Flashback FM",
+            "uuid": "25210ac8-da23-4a07-b822-08b49242a8de",
             "codec_fix": true,
             "frequency": 95.6,
             "type": 1,
@@ -25,6 +28,7 @@
         },
         {
             "name": "Game Radio",
+            "uuid": "935796a2-cbd5-460b-807d-53582623adfa",
             "codec_fix": true,
             "frequency": 95.0,
             "type": 1,
@@ -32,6 +36,7 @@
         },
         {
             "name": "Head Radio",
+            "uuid": "82adefdb-ab32-4def-aa73-e4f0762b4571",
             "codec_fix": true,
             "frequency": 89.1,
             "type": 1,
@@ -39,6 +44,7 @@
         },
         {
             "name": "K-JAH",
+            "uuid": "b800a899-009e-431b-ba4a-3318873d0f91",
             "codec_fix": true,
             "frequency": 89.1,
             "type": 1,
@@ -46,6 +52,7 @@
         },
         {
             "name": "Lips",
+            "uuid": "7e50e50b-635a-4b31-984c-7787412611eb",
             "codec_fix": true,
             "frequency": 106.0,
             "type": 1,
@@ -53,6 +60,7 @@
         },
         {
             "name": "MSX FM",
+            "uuid": "f97c68cf-0486-45c3-84bd-4aa6c0c4db99",
             "codec_fix": true,
             "frequency": 101.1,
             "type": 1,
@@ -60,6 +68,7 @@
         },
         {
             "name": "Rise FM",
+            "uuid": "d964a1f7-b0b8-44e2-ab46-e4b1386b4364",
             "codec_fix": true,
             "frequency": 100.0,
             "type": 1,

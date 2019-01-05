@@ -4,114 +4,133 @@
     "radios": [
         {
             "name": "Los Santos Rock Radio",
+            "uuid": "dd191b73-6b7e-46e6-925b-0ada43a0ab12",
             "frequency": 102.3,
             "type": 0,
             "id": 0
         },
         {
             "name": "Non Stop Pop FM",
+            "uuid": "3321f6b3-a608-4b8a-9825-6a037362ce32",
             "frequency": 100.7,
             "type": 0,
             "id": 1
         },
         {
             "name": "Radio Los Santos",
+            "uuid": "1323dd2a-c11a-41d6-8355-e3554eb9ca24",
             "frequency": 106.1,
             "type": 0,
             "id": 2
         },
         {
             "name": "Channel X",
+            "uuid": "3923b5e5-36b0-44f0-82a9-35405a3f6d2f",
             "frequency": 99.1,
             "type": 0,
             "id": 3
         },
         {
             "name": "Rebel Radio",
+            "uuid": "ca35a0c7-23bb-4464-9ed0-fe4e8ed4848b",
             "frequency": 101.9,
             "type": 0,
             "id": 5
         },
         {
             "name": "Soulwax FM",
+            "uuid": "37929739-6c4c-44bc-baf5-13ac72c3b608",
             "frequency": 99.9,
             "type": 0,
             "id": 6
         },
         {
             "name": "East Los FM",
+            "uuid": "04a6861e-01f8-430a-9250-94228d895850",
             "frequency": 106.2,
             "type": 0,
             "id": 7
         },
         {
             "name": "West Coast Classics",
+            "uuid": "c4420e9f-8304-477b-b362-22676c9addf4",
             "frequency": 95.6,
             "type": 0,
             "id": 8
         },
         {
             "name": "The Blue Ark",
+            "uuid": "a3cb69db-ba12-4d09-bc9b-3da3071bc2ea",
             "frequency": 89.7,
             "type": 0,
             "id": 10
         },
         {
             "name": "WorldWide FM",
+            "uuid": "0bf9c0c2-591a-455d-b95d-5fe1a9231095",
             "frequency": 90.2,
             "type": 0,
             "id": 11
         },
         {
             "name": "Flylo FM",
+            "uuid": "0127bba0-3412-4aa9-8a08-c69c5cb9d51d",
             "frequency": 95.8,
             "type": 0,
             "id": 12
         },
         {
             "name": "The Lowdown",
+            "uuid": "4a35eb27-8f4a-4944-b84e-e10656bbf924",
             "frequency": 91.1,
             "type": 0,
             "id": 13
         },
         {
             "name": "Radio Mirror Park",
+            "uuid": "c2af3ae4-f76a-404c-b8de-846801841295",
             "frequency": 88.9,
             "type": 0,
             "id": 14
         },
         {
             "name": "Space",
+            "uuid": "074be6fc-a119-46ea-8f46-75c28bc434b0",
             "frequency": 103.2,
             "type": 0,
             "id": 15
         },
         {
             "name": "Vinewood Boulevard Radio",
+            "uuid": "68ff10aa-2e29-4870-91f5-a3b1ca8ab2ad",
             "frequency": 105.1,
             "type": 0,
             "id": 16
         },
         {
             "name": "Self Radio",
+            "uuid": "99adafdf-4ee1-4e1b-ba45-5d5d1463eb92",
             "frequency": 104.3,
             "type": 0,
             "id": 17
         },
         {
             "name": "The Lab",
+            "uuid": "152d3bff-4fc7-4055-88ea-cb188b831dc9",
             "frequency": 94.5,
             "type": 0,
             "id": 18
         },
         {
             "name": "Blonded Los Santos",
+            "uuid": "c69d262b-193f-43c0-8b7e-b1bfe76dbeed",
             "frequency": 97.8,
             "type": 0,
             "id": 19
         },
         {
             "name": "Los Santos Underground Radio",
+            "uuid": "2e98a292-1718-44d6-9cd7-a7dd43eb507d",
             "frequency": 98.4,
             "type": 0,
             "id": 20

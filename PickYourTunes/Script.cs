@@ -134,7 +134,20 @@ namespace PickYourTunes
                     string JSON = Reader.ReadToEnd();
                     // Parse it
                     ConfigFile Config = JsonConvert.DeserializeObject<ConfigFile>(JSON);
-                    // And add it onto the existing list of radios
+                    // Iterate over the list of radios
+                    foreach (Radio NewRadio in Config.Radios)
+                    {
+                        // If the UUID is valid, add the radio
+                        if (Guid.TryParse(NewRadio.UUID, out _))
+                        {
+                            Radios.Add(NewRadio);
+                        }
+                        // If not, notify the user about it
+                        else
+                        {
+                            UI.Notify($"Warning: The radio '{NewRadio.Name}' was not added because it does not has a valid UUID.");
+                        }
+                    }
                     Radios.AddRange(Config.Radios);
                     // Notify that we have loaded the file
                     UI.Notify($"List of radios loaded: {Config.Name} by {Config.Author}");

@@ -15,6 +15,11 @@ namespace PickYourTunes.Items
         [JsonProperty("name")]
         public string Name { get; set; }
         /// <summary>
+        /// UUID used to identify the radio.
+        /// </summary>
+        [JsonProperty("uuid")]
+        public string UUID { get; set; }
+        /// <summary>
         /// If the codec fix should be applied.
         /// </summary>
         [DefaultValue(false)]
