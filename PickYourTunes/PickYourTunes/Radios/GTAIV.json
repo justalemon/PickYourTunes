@@ -7,77 +7,77 @@
             "uuid": "a11b7aaa-c2a9-4f27-b66b-ac8f1d61463a",
             "frequency": 102.1,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIV\\ElectroChocIV\\FK.wav"
+            "loc": "GTAIV\\ElectroChocIV\\FK.wav"
         },
         {
             "name": "Electro-Choc (EFLC)",
             "uuid": "0f070375-bad1-41ab-b888-c20cd894a513",
             "frequency": 102.1,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIV\\ElectroChocELFC\\THE_CROOKERS_MIX_32K.wav"
+            "loc": "GTAIV\\ElectroChocELFC\\THE_CROOKERS_MIX_32K.wav"
         },
         {
             "name": "San Juan Sounds (EFLC)",
             "uuid": "2f83fbfa-c378-4451-9f41-191df708c929",
             "frequency": 96.3,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIV\\SanJuanSoundsEFLC\\SANTIAGO_SOUNDS.wav"
+            "loc": "GTAIV\\SanJuanSoundsEFLC\\SANTIAGO_SOUNDS.wav"
         },
         {
             "name": "Liberty City Hardcore (EFLC)",
             "uuid": "a78423bd-8c8a-483a-8ea7-386b7a74840c",
             "frequency": 88.1,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIV\\LibertyCityHardcoreEFLC\\LCHC_32K_PH.wav"
+            "loc": "GTAIV\\LibertyCityHardcoreEFLC\\LCHC_32K_PH.wav"
         },
         {
             "name": "RamJam FM (EFLC)",
             "uuid": "8ae11fec-625e-4010-ae75-2e2818f6e7ac",
             "frequency": 99.7,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIV\\RamJamFM\\RAMJAM_MIX.wav"
+            "loc": "GTAIV\\RamJamFM\\RAMJAM_MIX.wav"
         },
         {
             "name": "The Beat (IV)",
             "uuid": "9ce608ee-0691-4a5a-bb4f-8dbb62754c98",
             "frequency": 102.7,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIV\\TheBeatIV\\BEAT.wav"
+            "loc": "GTAIV\\TheBeatIV\\BEAT.wav"
         },
         {
             "name": "The Beat (EFLC)",
             "uuid": "5bde17c8-1e3c-4bfe-a1b7-45d6bc375f17",
             "frequency": 102.7,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIV\\TheBeatEFLC\\1_FLEX32K.wav"
+            "loc": "GTAIV\\TheBeatEFLC\\1_FLEX32K.wav"
         },
         {
             "name": "The Classics (IV)",
             "uuid": "dd3872cf-00f7-4876-9bd4-063075690810",
             "frequency": 104.1,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIV\\TheClassics\\CLASSICS_MIX.wav"
+            "loc": "GTAIV\\TheClassics\\CLASSICS_MIX.wav"
         },
         {
             "name": "Vladivostok FM (EFLC)",
             "uuid": "20393d4a-1c1e-49ba-a610-30e51898d1e2",
             "frequency": 100.8,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIV\\VladivostokEFLC\\EUROBEAT.wav"
+            "loc": "GTAIV\\VladivostokEFLC\\EUROBEAT.wav"
         },
         {
             "name": "Massive B Soundsystem (IV)",
             "uuid": "332b0b1c-850d-4ad0-8f62-f4c012709f98",
             "frequency": 96.9,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIV\\MassiveBSoundsystem\\MASSIVEB_MIX.wav"
+            "loc": "GTAIV\\MassiveBSoundsystem\\MASSIVEB_MIX.wav"
         },
         {
             "name": "Vladivostok FM (IV)",
             "uuid": "b870fb63-6934-47ca-8fe6-e291d3f62f83",
             "frequency": 100.8,
             "type": 3,
-            "loc": "scripts\\SimpleRadio\\GTAIV\\VladivostokIV",
+            "loc": "GTAIV\\VladivostokIV",
             "songs": [
                 {
                     "file": "ADD_SPEED.wav"

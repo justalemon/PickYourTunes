@@ -8,7 +8,7 @@
             "codec_fix": true,
             "frequency": 109.0,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIII\\CHAT.wav"
+            "loc": "GTAIII\\CHAT.wav"
         },
         {
             "name": "Double Clef FM",
@@ -16,7 +16,7 @@
             "codec_fix": true,
             "frequency": 109.4,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIII\\CLASS.wav"
+            "loc": "GTAIII\\CLASS.wav"
         },
         {
             "name": "Flashback FM",
@@ -24,7 +24,7 @@
             "codec_fix": true,
             "frequency": 95.6,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIII\\FLASH.wav"
+            "loc": "GTAIII\\FLASH.wav"
         },
         {
             "name": "Game Radio",
@@ -32,7 +32,7 @@
             "codec_fix": true,
             "frequency": 95.0,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIII\\GAME.wav"
+            "loc": "GTAIII\\GAME.wav"
         },
         {
             "name": "Head Radio",
@@ -40,7 +40,7 @@
             "codec_fix": true,
             "frequency": 89.1,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIII\\HEAD.wav"
+            "loc": "GTAIII\\HEAD.wav"
         },
         {
             "name": "K-JAH",
@@ -48,7 +48,7 @@
             "codec_fix": true,
             "frequency": 89.1,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIII\\KJAH.wav"
+            "loc": "GTAIII\\KJAH.wav"
         },
         {
             "name": "Lips",
@@ -56,7 +56,7 @@
             "codec_fix": true,
             "frequency": 106.0,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIII\\LIPS.wav"
+            "loc": "GTAIII\\LIPS.wav"
         },
         {
             "name": "MSX FM",
@@ -64,7 +64,7 @@
             "codec_fix": true,
             "frequency": 101.1,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIII\\MSX.wav"
+            "loc": "GTAIII\\MSX.wav"
         },
         {
             "name": "Rise FM",
@@ -72,7 +72,7 @@
             "codec_fix": true,
             "frequency": 100.0,
             "type": 1,
-            "loc": "scripts\\SimpleRadio\\GTAIII\\RISE.wav"
+            "loc": "GTAIII\\RISE.wav"
         }
     ]
 }

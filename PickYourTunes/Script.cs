@@ -241,7 +241,7 @@ namespace PickYourTunes
             if (MusicFile.TotalTime == MusicFile.CurrentTime && Selected.Type == RadioType.Radio)
             {
                 CurrentSong[Selected] = Selected.Songs[Randomizer.Next(Selected.Songs.Count)];
-                MusicFile = new MediaFoundationReader(Selected.Location + "\\" + CurrentSong[Selected].File);
+                MusicFile = new MediaFoundationReader(Path.Combine(DataFolder, "Radios", Selected.Location, CurrentSong[Selected].File));
                 MusicOutput.Init(MusicFile);
                 MusicOutput.Play();
             }
@@ -276,7 +276,7 @@ namespace PickYourTunes
                 {
                     CurrentSong[Next] = Next.Songs[Randomizer.Next(Next.Songs.Count)];
                 }
-                string SongFile = Next.Type == RadioType.SingleFile ? Next.Location : Next.Location + "\\" + CurrentSong[Next].File;
+                string SongFile = Next.Type == RadioType.SingleFile ? Path.Combine(DataFolder, "Radios", Next.Location) : Path.Combine(DataFolder, "Radios", Next.Location, CurrentSong[Next].File);
                 if (!File.Exists(SongFile))
                 {
                     UI.Notify($"Error: The file {SongFile} does not exists");
