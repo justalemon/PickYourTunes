@@ -275,6 +275,11 @@ namespace PickYourTunes
                     CurrentSong[Next] = Next.Songs[Randomizer.Next(Next.Songs.Count)];
                 }
                 string SongFile = Next.Type == RadioType.SingleFile ? Next.Location : Next.Location + "\\" + CurrentSong[Next].File;
+                if (!File.Exists(SongFile))
+                {
+                    UI.ShowSubtitle($"Error: The file {SongFile} does not exists");
+                    goto FinishChange;
+                }
                 // "The data specified for the media type is invalid, inconsistent, or not supported by this object." with MediaFoundationReader
                 if (Next.CodecFix)
                 {
@@ -306,6 +311,7 @@ namespace PickYourTunes
             }
 
             // Set the next radio as the selected one
+            FinishChange:
             Selected = Next;
         }
     }
