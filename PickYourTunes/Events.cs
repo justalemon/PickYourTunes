@@ -143,7 +143,7 @@ namespace PickYourTunes
             }
 
             // If there is a frequency, add it at the end like every normal radio ad
-            string RadioName = Selected.Frequency == 0 ? Selected.Name : Selected.Name + " " + Selected.Frequency.ToString();
+            string RadioName = Selected.Frequency == 0 ? Selected.Name : Selected.Name + " " + Selected.Frequency.ToString("0.0");
 
             // Draw the previous, current and next radio name
             UIText PreviousUI = new UIText(Previous.Name, new Point((int)(UI.WIDTH * .5f), (int)(UI.HEIGHT * .025f)), .5f, Color.LightGray, GTA.Font.ChaletLondon, true, true, false);
