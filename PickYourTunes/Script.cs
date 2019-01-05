@@ -161,7 +161,7 @@ namespace PickYourTunes
             Tick += OnTickCheats;
             Tick += OnTickControls;
             Tick += OnTickDraw;
-            Tick += OnTickPause;
+            Tick += OnTickSelect;
             MusicOutput.PlaybackStopped += OnFileStop;
             Aborted += (Sender, Args) => { Streaming.Stop(); };
 

@@ -1,8 +1,10 @@
 ﻿using GTA;
 using GTA.Native;
 using NAudio.Wave;
+using PickYourTunes.Items;
 using PickYourTunes.Properties;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 
@@ -14,6 +16,10 @@ namespace PickYourTunes
         /// If the Radio system is paused.
         /// </summary>
         private bool Paused = false;
+        /// <summary>
+        /// The current radio being used on a vehicle.
+        /// </summary>
+        private Dictionary<Vehicle, Radio> CurrentRadio = new Dictionary<Vehicle, Radio>();
 
         private void OnTickCheats(object Sender, EventArgs Args)
         {
@@ -50,20 +56,65 @@ namespace PickYourTunes
             }
         }
 
-        private void OnTickPause(object Sender, EventArgs Args)
+        private void OnTickSelect(object Sender, EventArgs Args)
         {
             // Get if the player is leaving the vehicle
             bool IsExitingVehicle = Function.Call<bool>(Hash.GET_IS_TASK_ACTIVE, Game.Player.Character, 2);
-
-            // If the player is not on a vehicle and the selected radio is not OFF, or is leaving the vehicle or the game is paused
-            if ((Game.Player.Character.CurrentVehicle == null && Selected != Radios[0]) || IsExitingVehicle || Game.IsPaused)
+            bool IsEnteringVehicle = Function.Call<bool>(Hash.GET_IS_TASK_ACTIVE, Game.Player.Character, 160);
+            Vehicle CurrentVehicle = Game.Player.Character.CurrentVehicle;
+            Vehicle Attempting = Game.Player.Character.GetVehicleIsTryingToEnter();
+            
+            // If there is a vehicle but it does not has a radio stored
+            if (CurrentVehicle != null && !CurrentRadio.ContainsKey(CurrentVehicle))
             {
+                // See if the User has configured a radio by trying to get the values
+                Default Custom = DefaultStations.Find(X => X.Hash == CurrentVehicle.Model.Hash);
+
+                // If there is an entry on the custom radios and is more than one
+                if (Custom != null && Custom.Radios.Count < 0)
+                {
+                    // Try to get a custom radio
+                    int RandomRadio = Randomizer.Next(Custom.Radios.Count);
+                    Radio CustomRadio = Radios.Find(X => X.UUID == Custom.Radios[RandomRadio]);
+
+                    // If the radio is not valid, play a random radio
+                    if (CustomRadio == null)
+                    {
+                        CurrentRadio[CurrentVehicle] = GetRandomRadio();
+                    }
+                    // Otherwise, use the one that we have
+                    else
+                    {
+                        CurrentRadio[CurrentVehicle] = CustomRadio;
+                    }
+                }
+                // If there is no custom radio, information, use a random one
+                else
+                {
+                    CurrentRadio[CurrentVehicle] = GetRandomRadio();
+                }
+
+                // Finally, play the radio
+                PlayRadio(CurrentRadio[CurrentVehicle]);
+            }
+            // If there is a radio stored but the current radio does not match
+            if (CurrentVehicle != null && CurrentRadio[CurrentVehicle] != Selected)
+            {
+                // Set the current radio as selected
+                CurrentRadio[CurrentVehicle] = Selected;
+            }
+            // If the player is not on a vehicle and the selected radio is not OFF, or is leaving the vehicle, or the game is paused
+            else if ((CurrentVehicle == null && Selected != Radios[0]) || IsExitingVehicle || Game.IsPaused)
+            {
+                // Set the radio as off but don't store it
                 PlayRadio(Radios[0], false);
+                // And mark the radio as paused
                 Paused = true;
             }
-            // If the player is on a vehicle and the selected radio is not OFF
-            if (Game.Player.Character.CurrentVehicle != null && Paused && !IsExitingVehicle)
+            // If the player is on a vehicle and the radio is paused and is the player is not exiting the vehicle
+            else if (CurrentVehicle != null && Paused && !IsExitingVehicle)
             {
+                // If the player is on a vehicle
                 PlayRadio(Selected);
                 Paused = false;
             }
