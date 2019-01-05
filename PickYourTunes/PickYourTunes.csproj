@@ -53,8 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudioLogic.cs" />
     <Compile Include="Checks.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Events.cs" />
     <Compile Include="Items\ConfigFile.cs" />
     <Compile Include="Items\Radio.cs" />
     <Compile Include="Items\Song.cs" />
