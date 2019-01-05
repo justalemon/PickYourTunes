@@ -128,6 +128,10 @@ namespace PickYourTunes
                 MusicOutput.Init(MusicFile);
                 MusicOutput.Play();
             }
+            else if (MusicFile.TotalTime == MusicFile.CurrentTime && Selected.Type == RadioType.SingleFile)
+            {
+                MusicOutput.Play();
+            }
         }
 
         private void OnTickDraw(object Sender, EventArgs Args)
