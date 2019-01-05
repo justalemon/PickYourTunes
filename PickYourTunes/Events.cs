@@ -99,5 +99,19 @@ namespace PickYourTunes
             UIText NextUI = new UIText(Next.Name, new Point((int)(UI.WIDTH * .5f), (int)(UI.HEIGHT * .09f)), .5f, Color.LightGray, GTA.Font.ChaletLondon, true, true, false);
             NextUI.Draw();
         }
+
+        private void OnTickDefaultRadio(object Sender, EventArgs Args)
+        {
+            // Iterate over the vehicles on the map
+            foreach (Vehicle WorldVehicle in World.GetAllVehicles())
+            {
+                // If the vehicle is not from the player
+                if (Game.Player.Character.CurrentVehicle != WorldVehicle)
+                {
+                    // Set the radio as off
+                    WorldVehicle.RadioStation = RadioStation.RadioOff;
+                }
+            }
+        }
     }
 }
