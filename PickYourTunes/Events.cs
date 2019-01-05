@@ -70,7 +70,7 @@ namespace PickYourTunes
                 Default Custom = DefaultStations.Find(X => X.Hash == CurrentVehicle.Model.GetHashCode());
 
                 // If there is an entry on the custom radios and is more than one
-                if (Custom != null && Custom.Radios.Count < 0)
+                if (Custom != null && Custom.Radios.Count > 0)
                 {
                     // Try to get a custom radio
                     int RandomRadio = Randomizer.Next(Custom.Radios.Count);
