@@ -69,18 +69,6 @@ namespace PickYourTunes
         /// Usually <GTA V>\scripts\PickYourTunes
         /// </summary>
         private string DataFolder = new Uri(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), "PickYourTunes")).LocalPath;
-        /// <summary>
-        /// Our instance of WaveOutEvent that plays our custom files.
-        /// </summary>
-        private WaveOutEvent OutputDevice = new WaveOutEvent();
-        /// <summary>
-        /// The file that is currently playing.
-        /// </summary>
-        private AudioFileReader CurrentFile;
-        /// <summary>
-        /// The vehicle that the player was using previously.
-        /// </summary>
-        private int PreviousVehicle;
 
         /// <summary>
         /// The previous radio.
