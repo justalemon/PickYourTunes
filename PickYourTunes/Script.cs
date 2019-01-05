@@ -68,10 +68,10 @@ namespace PickYourTunes
         /// </summary>
         private ScriptSettings Config = ScriptSettings.Load("scripts\\PickYourTunes.ini");
         /// <summary>
-        /// The location where our sounds are loaded.
+        /// The location where our data is located.
         /// Usually <GTA V>\scripts\PickYourTunes
         /// </summary>
-        private string SongLocation = new Uri(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), "PickYourTunes")).LocalPath;
+        private string DataFolder = new Uri(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), "PickYourTunes")).LocalPath;
         /// <summary>
         /// Our instance of WaveOutEvent that plays our custom files.
         /// </summary>
@@ -175,9 +175,9 @@ namespace PickYourTunes
 
             // Check that the directory with our scripts exists
             // If not, create it
-            if (!Directory.Exists(SongLocation))
+            if (!Directory.Exists(DataFolder))
             {
-                Directory.CreateDirectory(SongLocation);
+                Directory.CreateDirectory(DataFolder);
             }
         }
 
