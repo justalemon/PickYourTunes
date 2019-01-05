@@ -1,4 +1,4 @@
-using GTA;
+﻿using GTA;
 using GTA.Native;
 using NAudio.Wave;
 using PickYourTunes.Properties;
@@ -10,6 +10,11 @@ namespace PickYourTunes
 {
     public partial class PickYourTunes : Script
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        private bool Paused = false;
+
         private void OnTickCheats(object Sender, EventArgs Args)
         {
             // Change the song to the next one
@@ -45,6 +50,25 @@ namespace PickYourTunes
             }
         }
 
+        private void OnTickPause(object Sender, EventArgs Args)
+        {
+            // Get if the player is leaving the vehicle
+            bool IsExitingVehicle = Function.Call<bool>(Hash.GET_IS_TASK_ACTIVE, Game.Player.Character, 2);
+
+            // If the player is not on a vehicle and the selected radio is not OFF, or is leaving the vehicle or the game is paused
+            if ((Game.Player.Character.CurrentVehicle == null && Selected != Radios[0]) || IsExitingVehicle || Game.IsPaused)
+            {
+                PlayRadio(Radios[0], false);
+                Paused = true;
+            }
+            // If the player is on a vehicle and the selected radio is not OFF
+            if (Game.Player.Character.CurrentVehicle != null && Paused && !IsExitingVehicle)
+            {
+                PlayRadio(Selected);
+                Paused = false;
+            }
+        }
+
         private void OnFileStop(object Sender, StoppedEventArgs Args)
         {
             if (MusicFile.TotalTime == MusicFile.CurrentTime && Selected.Type == RadioType.Radio)
@@ -58,8 +82,8 @@ namespace PickYourTunes
 
         private void OnTickDraw(object Sender, EventArgs Args)
         {
-            // If the user is not on a vehicle, return
-            if (Game.Player.Character.CurrentVehicle == null)
+            // If the user is not on a vehicle or the system is paused, return
+            if (Game.Player.Character.CurrentVehicle == null || Paused)
             {
                 return;
             }
