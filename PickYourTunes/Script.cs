@@ -204,6 +204,12 @@ namespace PickYourTunes
 
         private void OnTickDraw(object Sender, EventArgs Args)
         {
+            // If the user is not on a vehicle, return
+            if (Game.Player.Character.CurrentVehicle == null)
+            {
+                return;
+            }
+
             // If there is a frequency, add it at the end like every normal radio ad
             string RadioName = Selected.Frequency == 0 ? Selected.Name : Selected.Name + " " + Selected.Frequency.ToString();
 
