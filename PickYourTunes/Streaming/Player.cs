@@ -147,8 +147,11 @@ namespace PickYourTunes.Streaming
                             WaveProvider.AddSamples(Buffer, 0, Decompressed);
                         }
                     } while (State != StreamingState.Stopped);
-                    // Finally, dispose the decompressor
-                    Decompressor.Dispose();
+                    // If the decompressor is not empty, dispose it
+                    if (Decompressor != null)
+                    {
+                        Decompressor.Dispose();
+                    }
                 }
             }
             finally
