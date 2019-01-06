@@ -1,4 +1,4 @@
-using GTA;
+﻿using GTA;
 using NAudio.Wave;
 using PickYourTunes.Items;
 using System;
@@ -74,12 +74,13 @@ namespace PickYourTunes
                     }
                 }
                 MusicOutput.Play();
+                MusicOutput.Volume = UserSettings.Volume;
             }
             // If the radio is a stream
             else if (SelectedRadio.Type == RadioType.Stream)
             {
                 Game.RadioStation = RadioStation.RadioOff;
-                Streaming.Play(SelectedRadio.Location);
+                Streaming.Play(SelectedRadio.Location, UserSettings.Volume);
             }
 
             // Set the next radio as the selected one if is required

@@ -60,6 +60,7 @@
     <Compile Include="Items\ConfigFile.cs" />
     <Compile Include="Items\Default.cs" />
     <Compile Include="Items\Radio.cs" />
+    <Compile Include="Items\Settings.cs" />
     <Compile Include="Items\Song.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,6 +88,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="PickYourTunes\Default.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="PickYourTunes\Settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

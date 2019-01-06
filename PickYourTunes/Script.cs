@@ -33,6 +33,10 @@ namespace PickYourTunes
             }
         };
         /// <summary>
+        /// Settings for the current user.
+        /// </summary>
+        private Settings UserSettings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText("scripts\\PickYourTunes\\Settings.json"));
+        /// <summary>
         /// List of default radios for vehicles.
         /// </summary>
         private List<Default> DefaultStations = JsonConvert.DeserializeObject<List<Default>>(File.ReadAllText("scripts\\PickYourTunes\\Default.json"));

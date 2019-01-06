@@ -42,6 +42,11 @@ namespace PickYourTunes.Streaming
         private VolumeWaveProvider16 VolumeProvider;
 
         /// <summary>
+        /// The volume for the stream specified by the user.
+        /// </summary>
+        public float UserVolume;
+
+        /// <summary>
         /// Checks if the buffer is nearly full.
         /// </summary>
         private bool IsBufferNearlyFull => WaveProvider != null && WaveProvider.BufferLength - WaveProvider.BufferedBytes < WaveProvider.WaveFormat.AverageBytesPerSecond / 4;
@@ -222,7 +227,7 @@ namespace PickYourTunes.Streaming
                     Player = new WaveOut();
                     // Add a volume controller
                     VolumeProvider = new VolumeWaveProvider16(WaveProvider);
-                    //volumeProvider.Volume = volumeSlider1.Volume;
+                    VolumeProvider.Volume = UserVolume;
                     Player.Init(VolumeProvider);
                     //progressBarBuffer.Maximum = (int)bufferedWaveProvider.BufferDuration.TotalMilliseconds;
                 }
@@ -263,7 +268,7 @@ namespace PickYourTunes.Streaming
         /// <summary>
         /// Plays a stream on the player.
         /// </summary>
-        public void Play(string URL)
+        public void Play(string URL, float Volume)
         {
             // Stop the existing stream
             Stop();
@@ -275,6 +280,8 @@ namespace PickYourTunes.Streaming
             ThreadPool.QueueUserWorkItem(StreamMp3, URL);
             // Enable the timer
             HandlingTimer.Enabled = true;
+            // And set the volume
+            UserVolume = Volume;
         }
 
         /// <summary>
