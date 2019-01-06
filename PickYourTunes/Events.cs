@@ -130,7 +130,7 @@ namespace PickYourTunes
             }
             else if (MusicFile.TotalTime == MusicFile.CurrentTime && Selected.Type == RadioType.SingleFile)
             {
-                MusicOutput.Play();
+                PlayRadio(Selected, true, false);
             }
         }
 
