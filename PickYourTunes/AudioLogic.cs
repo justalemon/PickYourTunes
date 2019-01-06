@@ -1,4 +1,4 @@
-﻿using GTA;
+using GTA;
 using NAudio.Wave;
 using PickYourTunes.Items;
 using System;
@@ -22,9 +22,10 @@ namespace PickYourTunes
                 Progress[Selected] = MusicFile.CurrentTime;
             }
 
-            // Stop the streaming radio and local file
+            // Stop all of the inputs
             Streaming.Stop();
             MusicOutput.Stop();
+            Game.RadioStation = RadioStation.RadioOff;
 
             // If the chosen radio is vanilla
             if (SelectedRadio.Type == RadioType.Vanilla)
@@ -34,7 +35,6 @@ namespace PickYourTunes
             // If the radio is a single large file
             else if (SelectedRadio.Type == RadioType.SingleFile || SelectedRadio.Type == RadioType.Radio)
             {
-                Game.RadioStation = RadioStation.RadioOff;
                 if (MusicFile != null)
                 {
                     MusicFile.Dispose();
