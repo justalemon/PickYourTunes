@@ -14,7 +14,7 @@ namespace PickYourTunes
             return Radios[Randomizer.Next(Radios.Count)];
         }
 
-        private void PlayRadio(Radio SelectedRadio, bool Store = true)
+        private void PlayRadio(Radio SelectedRadio, bool Store = true, bool LoadTime = true)
         {
             // If there is a long file currently playing, store the playback status
             if (MusicOutput.PlaybackState == PlaybackState.Playing)
@@ -60,15 +60,18 @@ namespace PickYourTunes
                     MusicFile = new MediaFoundationReader(SongFile);
                 }
                 MusicOutput.Init(MusicFile);
-                if (Progress.ContainsKey(SelectedRadio))
+                if (LoadTime)
                 {
-                    MusicFile.CurrentTime = Progress[SelectedRadio];
-                }
-                else
-                {
-                    int RandomPosition = Randomizer.Next((int)MusicFile.TotalTime.TotalSeconds);
-                    TimeSpan RandomTimeSpan = TimeSpan.FromSeconds(RandomPosition);
-                    MusicFile.CurrentTime = RandomTimeSpan;
+                    if (Progress.ContainsKey(SelectedRadio))
+                    {
+                        MusicFile.CurrentTime = Progress[SelectedRadio];
+                    }
+                    else
+                    {
+                        int RandomPosition = Randomizer.Next((int)MusicFile.TotalTime.TotalSeconds);
+                        TimeSpan RandomTimeSpan = TimeSpan.FromSeconds(RandomPosition);
+                        MusicFile.CurrentTime = RandomTimeSpan;
+                    }
                 }
                 MusicOutput.Play();
             }
